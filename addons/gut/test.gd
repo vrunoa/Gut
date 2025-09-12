@@ -1012,7 +1012,7 @@ func assert_screenshot(viewport, name, text=""):
 	if !FileAccess.file_exists(screenshot_baseline_path): 
 		screenshot.save_png(screenshot_baseline_path)
 		if !gut.visual_autoaccept:
-			return _fail("new baseline for {name} ({screenshot_path})".format({
+			return _fail("found new baseline for {name}({screenshot_path})".format({
 					"name": name,
 					"screenshot_path": screenshot_baseline_path,
 				})
@@ -1020,7 +1020,7 @@ func assert_screenshot(viewport, name, text=""):
 		else:
 			return _pass(text)
 	else:
-		var fresh_screenshot_path = "{diff_path}/{name}.png".format({
+		var fresh_screenshot_path = "{diff_path}/{name}.fresh.png".format({
 			"name": name, 
 			"diff_path": gut.visual_diff_path,
 		})
@@ -1032,7 +1032,7 @@ func assert_screenshot(viewport, name, text=""):
 			if dir.file_exists(fp):
 				var clean = dir.remove(fp)
 				if clean != OK:
-					return _fail("failed to cleanup diff screenshots: {name} ({fp})".format({
+					return _fail("failed to cleanup diff screenshots: {name}({fp})".format({
 						"name": name,
 						"fp": fp,
 					}))
@@ -1041,7 +1041,14 @@ func assert_screenshot(viewport, name, text=""):
 		var diff_result = ImageComparator.compare_files(screenshot_baseline_path, fresh_screenshot_path)
 		if diff_result.error != ImageComparator.ImageComparatorError.OK:
 			return _fail("failed to compare images: {error_code}". format({
-				"error_code": diff_result.error
+				"error_code": diff_result["error"]
+			}))
+		if diff_result["percent_different"] > gut.visual_threshold:
+			diff_result["diff_image"].save_png(diff_screenshot_path)
+			return _fail("found visual {percent}% differences {name}({diff_path})".format({
+				"percent": diff_result["percent_different"],
+				"name": name,
+				"diff_path": diff_screenshot_path
 			}))
 			
 		return _pass(text)
