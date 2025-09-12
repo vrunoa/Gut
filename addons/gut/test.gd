@@ -984,32 +984,46 @@ func assert_gt(got, expected, text=""):
 
 ## Brief description of what this assertion does
 ## [codeblock]
+##
+##    var viewport = my_scene.get_viewport()
+##    var name = "unique_screenshot_name"
+##
 ##    # Example usage
-##    assert_screenshot(value, expected, "optional description")
+##    assert_screenshot(viewport, name, "optional description")
+##
+##    # Passing
+##    # First time this is run a baseline is created.  If visual_autoaccept is
+##    # true then this will pass, otherwise it will fail and you will need to
+##    # verify the screenshot and re-run the test.
+##
+##    # Failing
+##    # If the screenshot differs from the baseline by more than visual_threshold
+##    # percent then this will fail and a diff screenshot will be created.
+##
 ## [/codeblock]
 func assert_screenshot(viewport, name, text=""):
 	if viewport == null:
 		return _fail("viewport should not be null")
-	
+
 	if name == "":
 		return _fail("screenshot name should not be empty")
-		
+
 	var filename_regex = RegEx.new()
 	filename_regex.compile("^[a-zA-Z0-9._-]+$")
 	if !filename_regex.search(name):
 		return _fail("invalid screenshot name")
-	
+
 	var dir = DirAccess.open("res://")
 	if dir:
 		dir.make_dir_recursive(gut.visual_baseline_path)
 		dir.make_dir_recursive(gut.visual_diff_path)
-	
-	var screenshot_baseline_path = "{baseline_path}/{name}.png".format({ 
+
+	var screenshot_baseline_path = "{baseline_path}/{name}.png".format({
 		"baseline_path": gut.visual_baseline_path,
 		"name": name
 	})
 	var screenshot = viewport.get_texture().get_image()
-	if !FileAccess.file_exists(screenshot_baseline_path): 
+	if !FileAccess.file_exists(screenshot_baseline_path):
 		screenshot.save_png(screenshot_baseline_path)
 		if !gut.visual_autoaccept:
 			return _fail("found new baseline for {name}({screenshot_path})".format({
@@ -1021,11 +1035,11 @@ func assert_screenshot(viewport, name, text=""):
 			return _pass(text)
 	else:
 		var fresh_screenshot_path = "{diff_path}/{name}.fresh.png".format({
-			"name": name, 
+			"name": name,
 			"diff_path": gut.visual_diff_path,
 		})
 		var diff_screenshot_path = "{diff_path}/{name}.diff.png".format({
-			"name": name, 
+			"name": name,
 			"diff_path": gut.visual_diff_path,
 		})
 		for fp in [fresh_screenshot_path, diff_screenshot_path]:
@@ -1036,7 +1050,7 @@ func assert_screenshot(viewport, name, text=""):
 						"name": name,
 						"fp": fp,
 					}))
-					
+
 		screenshot.save_png(fresh_screenshot_path)
 		var diff_result = ImageComparator.compare_files(screenshot_baseline_path, fresh_screenshot_path)
 		if diff_result.error != ImageComparator.ImageComparatorError.OK:
@@ -1050,9 +1064,9 @@ func assert_screenshot(viewport, name, text=""):
 				"name": name,
 				"diff_path": diff_screenshot_path
 			}))
-			
+
 		return _pass(text)
-	
+
 
 ## Asserts got is greater than or equal to expected.
 ## [codeblock]
