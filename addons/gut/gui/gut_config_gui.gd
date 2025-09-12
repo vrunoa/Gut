@@ -106,6 +106,7 @@ var hide_this = null :
 # --------------
 
 func set_options(opts):
+	print("gut_config_gui opts", opts)
 	var options = opts.duplicate()
 
 	# _add_title('Save/Load')
@@ -185,6 +186,12 @@ func set_options(opts):
 		test_dir.enabled_button.visible = true
 		test_dir.enabled_button.button_pressed = options.dirs.has(value)
 
+	_add_title("Visual testings opts")
+	_add_file("visual_baseline_path", options.visual.baseline_path, "Baseline path")
+	_add_file("visual_diff_path", options.visual.diff_path, "Diff path")
+	_add_number("visual_threshold", options.visual.threshold, "Threshold", 0.0, 100.0)
+	_add_boolean("visual_autoaccept", options.visual.autoaccept, "Autoaccept", 
+		"Automatically accept new or changed images as baseline when visual tests fail")
 
 	opt_maker.add_title("XML Output")
 	opt_maker.add_save_file_anywhere("junit_xml_file", options.junit_xml_file, "Output Path",
@@ -273,6 +280,12 @@ func get_options(base_opts):
 	# Misc
 	to_return.prefix = _cfg_ctrls.prefix.value
 	to_return.suffix = _cfg_ctrls.suffix.value
+	
+	# Visual testing options
+	to_return.visual.baseline_path = _cfg_ctrls.visual_baseline_path.value
+	to_return.visual.diff_path = _cfg_ctrls.visual_diff_path.value
+	to_return.visual.threshold = _cfg_ctrls.visual_threshold.value
+	to_return.visual.autoaccept = _cfg_ctrls.visual_autoaccept.value
 
 	return to_return
 
