@@ -189,8 +189,8 @@ func set_options(opts):
 	_add_file("visual_baseline_path", options.visual.baseline_path, "Baseline path")
 	_add_file("visual_diff_path", options.visual.diff_path, "Diff path")
 	_add_number("visual_threshold", options.visual.threshold, "Threshold", 0.0, 100.0)
-	_add_boolean("visual_autoaccept", options.visual.autoaccept, "Autoaccept",
-		"Automatically accept new or changed images as baseline when visual tests fail")
+	_add_boolean("visual_autoaccept", options.visual.autoaccept, "Autoaccept new",
+		"Automatically accept new baselines")
 
 	opt_maker.add_title("XML Output")
 	opt_maker.add_save_file_anywhere("junit_xml_file", options.junit_xml_file, "Output Path",
