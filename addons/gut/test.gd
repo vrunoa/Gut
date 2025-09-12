@@ -982,14 +982,13 @@ func assert_gt(got, expected, text=""):
 		else:
 			_fail(disp)
 
-## Brief description of what this assertion does
+## Assert tree root screenshot doesnt introduce difference with baseline
 ## [codeblock]
 ##
-##    var viewport = my_scene.get_viewport()
 ##    var name = "unique_screenshot_name"
 ##
 ##    # Example usage
-##    assert_screenshot(viewport, name, "optional description")
+##    assert_screenshot(name, "optional description")
 ##
 ##    # Passing
 ##    # First time this is run a baseline is created.  If visual_autoaccept is
@@ -1001,9 +1000,35 @@ func assert_gt(got, expected, text=""):
 ##    # percent then this will fail and a diff screenshot will be created.
 ##
 ## [/codeblock]
-func assert_screenshot(viewport, name, text=""):
+func assert_screenshot(name, text=""):
+	var node = await get_tree().root
+	return assert_node_screenshot(node, name, text)
+
+## Assert node screenshot doesnt introduce difference with baseline
+## [codeblock]
+##
+##    var name = "unique_screenshot_name"
+##
+##    # Example usage
+##    assert_node_screenshot(node, name, "optional description")
+##
+##    # Passing
+##    # First time this is run a baseline is created.  If visual_autoaccept is
+##    # true then this will pass, otherwise it will fail and you will need to
+##    # verify the screenshot and re-run the test.
+##
+##    # Failing
+##    # If the screenshot differs from the baseline by more than visual_threshold
+##    # percent then this will fail and a diff screenshot will be created.
+##
+## [/codeblock]
+func assert_node_screenshot(node, name, text=""):
+	if !node.has_method("get_viewport"):
+		return _fail("provided node doesnt have get_viewport method")
+	
+	var viewport = node.get_viewport()
 	if viewport == null:
-		return _fail("viewport should not be null")
+		return _fail("got null viewport for node")
 
 	if name == "":
 		return _fail("screenshot name should not be empty")
