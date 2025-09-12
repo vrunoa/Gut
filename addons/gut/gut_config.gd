@@ -15,6 +15,13 @@ var _deprecated_values = {
 	"errors_do_not_cause_failure": "Use failure_error_types instead."
 }
 
+var visual_options = {
+	baseline_path = "test/visual/.baseline",
+	diff_path = "test/visual/.diff",
+	threshold = 0.0,
+	autoaccept = false,
+}
+
 var default_options = {
 	background_color = Color(.15, .15, .15, 1).to_html(),
 	config_file = 'res://.gutconfig.json',
@@ -57,9 +64,9 @@ var default_options = {
 	failure_error_types = ["engine", "gut", "push_error"],
 	wait_log_delay = .5,
 
+	visual = visual_options,
 	gut_on_top = true,
 }
-
 
 var options = default_options.duplicate()
 var logger = GutUtils.get_logger()
@@ -151,6 +158,7 @@ func _apply_options(opts, gut):
 	gut.junit_xml_file = opts.junit_xml_file
 	gut.junit_xml_timestamp = opts.junit_xml_timestamp
 	gut.paint_after = str(opts.paint_after).to_float()
+<<<<<<< HEAD
 	gut.wait_log_delay = opts.wait_log_delay
 
 	# These error_tracker options default to true.  Don't trust this comment.
@@ -164,6 +172,15 @@ func _apply_options(opts, gut):
 		gut.error_tracker.treat_gut_errors_as = GutUtils.TREAT_AS.NOTHING
 
 	gut.error_tracker.register_loggers = !opts.no_error_tracking
+=======
+	gut.treat_error_as_failure = !opts.errors_do_not_cause_failure
+	
+	# Visual testing options
+	gut.visual_baseline_path = opts.visual.baseline_path
+	gut.visual_diff_path = opts.visual.diff_path
+	gut.visual_threshold = opts.visual.threshold
+	gut.visual_autoaccept = opts.visual.autoaccept
+>>>>>>> 11f89f2 (add default opts for visual)
 
 	return gut
 
