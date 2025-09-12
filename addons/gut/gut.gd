@@ -113,6 +113,26 @@ var post_run_script = _post_run_script :
 	get: return _post_run_script
 	set(val): _post_run_script = val
 
+var _visual_baseline_path = ''
+var visual_baseline_path = _visual_baseline_path:
+	get: return _visual_baseline_path
+	set(val): _visual_baseline_path = val
+
+var _visual_diff_path = ''
+var visual_diff_path = _visual_diff_path:
+	get: return _visual_diff_path
+	set(val): _visual_diff_path = val
+	
+var _visual_threshold = 0.0
+var visual_threshold = _visual_threshold:
+	get: return _visual_threshold
+	set(val): _visual_threshold = val
+
+var _visual_autoaccept = false
+var visual_autoaccept = _visual_autoaccept:
+	get: return _visual_autoaccept
+	set(val): _visual_autoaccept = val
+
 var _color_output = false
 # Flag to color output at the command line and in the GUT GUI.
 var color_output = false :
