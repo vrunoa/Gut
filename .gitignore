@@ -33,3 +33,6 @@ documentation/docs/_build
 
 documentation/class_ref_xml
 documentation/class_ref/__pycache__
+
+test/visual/.baseline
+test/visual/.diff
