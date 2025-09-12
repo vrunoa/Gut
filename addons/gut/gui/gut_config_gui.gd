@@ -185,7 +185,7 @@ func set_options(opts):
 		test_dir.enabled_button.visible = true
 		test_dir.enabled_button.button_pressed = options.dirs.has(value)
 
-	_add_title("Visual testings opts")
+	_add_title("Visual assert options")
 	_add_file("visual_baseline_path", options.visual.baseline_path, "Baseline path")
 	_add_file("visual_diff_path", options.visual.diff_path, "Diff path")
 	_add_number("visual_threshold", options.visual.threshold, "Threshold", 0.0, 100.0)
