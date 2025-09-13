@@ -16,10 +16,7 @@ var _deprecated_values = {
 }
 
 var visual_options = {
-	baseline_path = "test/visual/.baseline",
-	diff_path = "test/visual/.diff",
-	threshold = 0.0,
-	autoaccept = false,
+	
 }
 
 var default_options = {
@@ -65,6 +62,10 @@ var default_options = {
 	wait_log_delay = .5,
 
 	visual = visual_options,
+	visual_baseline_path = "test/visual/.baseline",
+	visual_diff_path = "test/visual/.diff",
+	visual_threshold = 0.0,
+	visual_autoaccept = false,
 	gut_on_top = true,
 }
 
@@ -96,7 +97,7 @@ func _load_options_from_config_file(file_path, into):
 
 	var json = f.get_as_text()
 	f = null # close file
-
+	
 	var test_json_conv = JSON.new()
 	test_json_conv.parse(json)
 	var results = test_json_conv.get_data()
@@ -175,6 +176,7 @@ func _apply_options(opts, gut):
 =======
 	gut.treat_error_as_failure = !opts.errors_do_not_cause_failure
 	
+<<<<<<< HEAD
 	# Visual testing options
 	gut.visual_baseline_path = opts.visual.baseline_path
 	gut.visual_diff_path = opts.visual.diff_path
@@ -182,6 +184,14 @@ func _apply_options(opts, gut):
 	gut.visual_autoaccept = opts.visual.autoaccept
 >>>>>>> 11f89f2 (add default opts for visual)
 
+=======
+	# Visual assertion options
+	gut.visual_baseline_path = opts.visual_baseline_path
+	gut.visual_diff_path = opts.visual_diff_path
+	gut.visual_threshold = opts.visual_threshold
+	gut.visual_autoaccept = opts.visual_autoaccept
+	
+>>>>>>> ecf1526 (use flat config)
 	return gut
 
 
