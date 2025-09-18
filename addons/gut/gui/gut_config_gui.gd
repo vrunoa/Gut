@@ -281,10 +281,10 @@ func get_options(base_opts):
 	to_return.suffix = _cfg_ctrls.suffix.value
 
 	# Visual testing options
-	to_return.visual.baseline_path = _cfg_ctrls.visual_baseline_path.value
-	to_return.visual.diff_path = _cfg_ctrls.visual_diff_path.value
-	to_return.visual.threshold = _cfg_ctrls.visual_threshold.value
-	to_return.visual.autoaccept = _cfg_ctrls.visual_autoaccept.value
+	to_return.visual_baseline_path = _cfg_ctrls.visual_baseline_path.value
+	to_return.visual_diff_path = _cfg_ctrls.visual_diff_path.value
+	to_return.visual_threshold = _cfg_ctrls.visual_threshold.value
+	to_return.visual_autoaccept = _cfg_ctrls.visual_autoaccept.value
 
 	return to_return
 
