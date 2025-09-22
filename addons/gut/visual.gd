@@ -1,6 +1,9 @@
 extends GutTest 
 class_name GutVisualTest
 
+func _init():
+	OS.set_environment("GUT_VISUAL_RUN", "1")
+
 var _group_dir: String = ""
 	
 func before_all():
