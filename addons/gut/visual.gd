@@ -2,15 +2,16 @@ extends GutTest
 class_name GutVisualTest
 
 var _group_dir: String = ""
-var group_dir = _group_dir:
-	get: return _group_dir
-	set(val): _group_dir = val
 	
 func before_all():
-	group_dir = ""
+	_group_dir = ""
 
 func after_all():
-	group_dir = ""
+	_group_dir = ""
+
+func with_options(opts: Dictionary = {}):
+	if opts.has("group_dir"):
+		_group_dir = opts["group_dir"]
 
 ## Assert tree root screenshot doesnt introduce difference with baseline
 ## [codeblock]
@@ -32,7 +33,7 @@ func after_all():
 ## [/codeblock]
 func assert_screenshot(name, text=""):
 	var node = await get_tree().root
-	return assert_node_screenshot(node, name, text, group_dir)
+	return assert_node_screenshot(node, name, text, _group_dir)
 
 ## Assert node screenshot doesnt introduce difference with baseline
 ## [codeblock]
