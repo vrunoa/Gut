@@ -57,7 +57,6 @@ var default_options = {
 	failure_error_types = ["engine", "gut", "push_error"],
 	wait_log_delay = .5,
 
-	visual = visual_options,
 	visual_baseline_path = "test/visual/.baseline",
 	visual_diff_path = "test/visual/.diff",
 	visual_threshold = 0.0,
