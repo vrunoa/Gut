@@ -185,11 +185,11 @@ func set_options(opts):
 		test_dir.enabled_button.visible = true
 		test_dir.enabled_button.button_pressed = options.dirs.has(value)
 
-	_add_title("Visual assert options")
-	_add_file("visual_baseline_path", options.visual_baseline_path, "Baseline path")
-	_add_file("visual_diff_path", options.visual_diff_path, "Diff path")
-	_add_number("visual_threshold", options.visual_threshold, "Threshold", 0.0, 100.0)
-	_add_boolean("visual_autoaccept", options.visual_autoaccept, "Autoaccept new",
+	opt_maker.add_title("Visual assert options")
+	opt_maker.add_file("visual_baseline_path", options.visual_baseline_path, "Baseline path")
+	opt_maker.add_file("visual_diff_path", options.visual_diff_path, "Diff path")
+	opt_maker.add_number("visual_threshold", options.visual_threshold, "Threshold", 0.0, 100.0)
+	opt_maker.add_boolean("visual_autoaccept", options.visual_autoaccept, "Autoaccept new",
 		"Automatically accept new baselines")
 
 	opt_maker.add_title("XML Output")
