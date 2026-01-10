@@ -169,10 +169,10 @@ func _apply_options(opts, gut):
 	gut.error_tracker.register_loggers = !opts.no_error_tracking
 
 	# Visual testing options
-	gut.visual_baseline_path = opts.visual.baseline_path
-	gut.visual_diff_path = opts.visual.diff_path
-	gut.visual_threshold = opts.visual.threshold
-	gut.visual_autoaccept = opts.visual.autoaccept
+	gut.visual_baseline_path = opts.visual_baseline_path
+	gut.visual_diff_path = opts.visual_diff_path
+	gut.visual_threshold = opts.visual_threshold
+	gut.visual_autoaccept = opts.visual_autoaccept
 
 	return gut
 
