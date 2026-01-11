@@ -982,7 +982,6 @@ func assert_gt(got, expected, text=""):
 		else:
 			_fail(disp)
 
-
 ## Asserts got is greater than or equal to expected.
 ## [codeblock]
 ##    var bigger = 5

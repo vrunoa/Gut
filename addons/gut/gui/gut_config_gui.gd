@@ -185,6 +185,12 @@ func set_options(opts):
 		test_dir.enabled_button.visible = true
 		test_dir.enabled_button.button_pressed = options.dirs.has(value)
 
+	opt_maker.add_title("Visual assert options")
+	opt_maker.add_file("visual_baseline_path", options.visual_baseline_path, "Baseline path")
+	opt_maker.add_file("visual_diff_path", options.visual_diff_path, "Diff path")
+	opt_maker.add_number("visual_threshold", options.visual_threshold, "Threshold", 0.0, 100.0)
+	opt_maker.add_boolean("visual_autoaccept", options.visual_autoaccept, "Autoaccept new",
+		"Automatically accept new baselines")
 
 	opt_maker.add_title("XML Output")
 	opt_maker.add_save_file_anywhere("junit_xml_file", options.junit_xml_file, "Output Path",
@@ -273,6 +279,12 @@ func get_options(base_opts):
 	# Misc
 	to_return.prefix = _cfg_ctrls.prefix.value
 	to_return.suffix = _cfg_ctrls.suffix.value
+
+	# Visual testing options
+	to_return.visual_baseline_path = _cfg_ctrls.visual_baseline_path.value
+	to_return.visual_diff_path = _cfg_ctrls.visual_diff_path.value
+	to_return.visual_threshold = _cfg_ctrls.visual_threshold.value
+	to_return.visual_autoaccept = _cfg_ctrls.visual_autoaccept.value
 
 	return to_return
 

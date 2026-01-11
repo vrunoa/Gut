@@ -57,9 +57,12 @@ var default_options = {
 	failure_error_types = ["engine", "gut", "push_error"],
 	wait_log_delay = .5,
 
+	visual_baseline_path = "test/visual/.baseline",
+	visual_diff_path = "test/visual/.diff",
+	visual_threshold = 0.0,
+	visual_autoaccept = false,
 	gut_on_top = true,
 }
-
 
 var options = default_options.duplicate()
 var logger = GutUtils.get_logger()
@@ -164,6 +167,12 @@ func _apply_options(opts, gut):
 		gut.error_tracker.treat_gut_errors_as = GutUtils.TREAT_AS.NOTHING
 
 	gut.error_tracker.register_loggers = !opts.no_error_tracking
+
+	# Visual testing options
+	gut.visual_baseline_path = opts.visual_baseline_path
+	gut.visual_diff_path = opts.visual_diff_path
+	gut.visual_threshold = opts.visual_threshold
+	gut.visual_autoaccept = opts.visual_autoaccept
 
 	return gut
 
